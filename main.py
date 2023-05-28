@@ -47,7 +47,6 @@ def lancer_fenetre_principale(etatconnexion):
     frame = tk.Frame(cnv)
     frame.pack()
     dictionnaire_affiche = False
-
     btnAffichage = tk.Button(frame, text="Afficher le dictionnaire", command=lambda: wrapper_function(functions.AfficherDictionnaire, cnv))
     btnAffichage.pack(side="left")
     if etatconnexion == True:
@@ -58,7 +57,6 @@ def lancer_fenetre_principale(etatconnexion):
 
 
 # Appeler la fonction pour afficher la fenêtre de connexion
-connexion.afficher_fenetre_connexion(gestion_etat_connexion, lancer_fenetre_principale)
+connexion.afficher_fenetre_connexion(gestion_etat_connexion)
 
-#labeletat = tk.Label(text=etat_connexion)
-#labeletat.pack()
+
