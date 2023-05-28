@@ -59,7 +59,6 @@ def RecupDefinition(titre):
         with db.cursor() as c:
             c.execute(request, (titre,))
             resultat = c.fetchone()
-
     return resultat
 
 
@@ -79,6 +78,13 @@ def ModificationDefinition(definition, titre):
         with db.cursor() as c:
             c.execute(request, (definition, titre))
             db.commit()
+def DeleteDefinition(titre):
+    request = 'DELETE FROM dictionnaire WHERE titre=%s'
+    with mysql.connector.connect(**connection_params) as db:
+        with db.cursor() as c:
+            c.execute(request, (titre,))
+            db.commit()
+
 def Modification(request):
     with mysql.connector.connect(**connection_params) as db:
         with db.cursor() as c:

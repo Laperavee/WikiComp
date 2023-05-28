@@ -5,7 +5,7 @@ import functions
 def updatewindow():
     root = tk.Tk()
     root.geometry("400x200")
-
+    root.title("Modification / Suppression")
     custom_font = font.Font(size=16)
 
     resultats = functions.AfficherTitre()
@@ -30,6 +30,9 @@ def updatewindow():
 def modifrequete(description,titre,window):
     functions.ModificationDefinition(description.get(),titre)
     window.destroy()
+def deleterequete(titre,window):
+    functions.DeleteDefinition(titre)
+    window.destroy()
 def newwindowmodif(titre):
     window = tk.Tk()
     window.geometry("400x600")
@@ -48,6 +51,8 @@ def newwindowmodif(titre):
         btnPush = tk.Button(window, text="Modifier",
                             command=lambda: modifrequete(textDescription,labelTitre.cget("text"),window))
         btnPush.pack()
+        btnSuppr = tk.Button(window, text="Supprimer", command=lambda: deleterequete(labelTitre.cget("text"),window))
+        btnSuppr.pack()
     else:
         labelErreur = tk.Label(window, text="Aucune définition trouvée pour le titre donné.")
         labelErreur.pack()

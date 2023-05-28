@@ -36,7 +36,7 @@ def lancer_fenetre_principale(etatconnexion):
     # Créer la fenêtre principale
     root = tk.Tk()
     root.geometry("800x600")
-
+    root.title("Dictionnaire de données")
     frame_main = tk.Frame(root)  # Conteneur principal
     frame_main.pack(fill=tk.BOTH, expand=True)
 

@@ -7,7 +7,7 @@ def InsertDefinition(titre,definition,root):
 def insertionwindow():
     root = tk.Tk()
     root.geometry("800x600")
-
+    root.title("Nouvelle définition")
     custom_font = font.Font(size=16)
 
     labelInfo = tk.Label(root, text="Insérer une définition", font=custom_font)
