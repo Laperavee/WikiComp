@@ -1,11 +1,13 @@
+# connexion.py
 import tkinter as tk
 from tkinter import messagebox
 import hashlib
 
 import functions
 
-
-def se_connecter(entryUsername, entryPassword, fenetre_connexion, callback, fermer_fenetre_connexion):
+def DestroyApp(root):
+    root.quit()
+def se_connecter(entryUsername, entryPassword, root, callback):
     # Récupérer les valeurs du nom d'utilisateur et du mot de passe
     username = entryUsername.get()
     password = entryPassword.get()
@@ -19,46 +21,43 @@ def se_connecter(entryUsername, entryPassword, fenetre_connexion, callback, ferm
             # Afficher un message de réussite
             messagebox.showinfo("Connexion réussie", "Vous êtes connecté !")
             user_connexion = True
-            callback(user_connexion)
-            fermer_fenetre_connexion()
             break
 
-    if not user_connexion:
-        # Afficher un message d'erreur
-        messagebox.showerror("Erreur de connexion", "Nom d'utilisateur ou mot de passe incorrect.")
-        callback(user_connexion)
+    callback(user_connexion)
+
 
 def afficher_fenetre_connexion(callback, lancer_fenetre_principale):
     # Créer la fenêtre de connexion
-    fenetre_connexion = tk.Toplevel()
-    fenetre_connexion.title("Connexion")
+    root = tk.Tk()
+    root.title("Connexion")
 
     # Créer les widgets
-    labelUsername = tk.Label(fenetre_connexion, text="Nom d'utilisateur:")
+    labelUsername = tk.Label(root, text="Nom d'utilisateur:")
     labelUsername.pack()
-    entryUsername = tk.Entry(fenetre_connexion)
+    entryUsername = tk.Entry(root)
     entryUsername.pack()
 
-    labelPassword = tk.Label(fenetre_connexion, text="Mot de passe:")
+    labelPassword = tk.Label(root, text="Mot de passe:")
     labelPassword.pack()
-    entryPassword = tk.Entry(fenetre_connexion, show="*")
+    entryPassword = tk.Entry(root, show="*")
     entryPassword.pack()
 
-    etat = tk.BooleanVar()  # Variable pour stocker l'état de la connexion
-
     def fermer_fenetre_connexion():
-        fenetre_connexion.destroy()
+        root.destroy()
 
     def callback_connexion():
         # Appeler la fonction pour se connecter
-        se_connecter(entryUsername, entryPassword, fenetre_connexion, callback, fermer_fenetre_connexion)
+        se_connecter(entryUsername, entryPassword, root, callback)
 
-    btnConnexion = tk.Button(fenetre_connexion, text="Se connecter", command=callback_connexion)
+    def callback_connexion_wrapper():
+        callback_connexion()
+
+    btnConnexion = tk.Button(root, text="Se connecter", command=callback_connexion_wrapper)
     btnConnexion.pack()
 
-    btnInvite = tk.Button(fenetre_connexion, text="Invité", command=lambda: fenetre_connexion.destroy())
+    btnInvite = tk.Button(root, text="Invité", command=lambda: callback(False))
     btnInvite.pack()
 
-    # Lancer la boucle principale de la fenêtre de connexion
-    fenetre_connexion.protocol("WM_DELETE_WINDOW", lambda: callback(False))
-    fenetre_connexion.mainloop()
+    # Lancer la boucle principale
+    root.protocol("WM_DELETE_WINDOW", DestroyApp(root))
+    root.mainloop()
