@@ -3,6 +3,8 @@ import tkinter.messagebox
 
 import functions
 import connexion
+import insertion
+import update
 
 btnAffichage = None
 def wrapper_function(func, *args, **kwargs):
@@ -50,13 +52,13 @@ def lancer_fenetre_principale(etatconnexion):
     btnAffichage = tk.Button(frame, text="Afficher le dictionnaire", command=lambda: wrapper_function(functions.AfficherDictionnaire, cnv))
     btnAffichage.pack(side="left")
     if etatconnexion == True:
-        btnInsertion = tk.Button(frame, text="Insérer une définition")
+        btnInsertion = tk.Button(frame, text="Insérer une définition", command=lambda: insertion.insertionwindow())
         btnInsertion.pack(side="left")
-
+        btnUpdate = tk.Button(frame, text="Modifier une définition", command=lambda: update.updatewindow())
+        btnUpdate.pack(side="left")
     root.mainloop()
 
 
 # Appeler la fonction pour afficher la fenêtre de connexion
 connexion.afficher_fenetre_connexion(gestion_etat_connexion)
-
 

@@ -3,6 +3,8 @@ from tkinter import ttk
 
 import mysql.connector
 
+import insertion
+
 # Paramètres de connexion à la base de données
 connection_params = {
     'host': 'localhost',
@@ -50,16 +52,33 @@ def AfficherDictionnaire(cnv):
     dictionnaire_affiche = True
 
     return treeview
-def InsertionDefinition():
-    titre = "Titre de la définition"
-    definition = "Contenu de la définition"
+
+def RecupDefinition(titre):
+    request = "SELECT definition FROM dictionnaire WHERE titre=%s"
+    with mysql.connector.connect(**connection_params) as db:
+        with db.cursor() as c:
+            c.execute(request, (titre,))
+            resultat = c.fetchone()
+
+    return resultat
+
+
+def AfficherTitre():
+    request = "SELECT titre FROM dictionnaire"
+    resultats = PushRequest(request)
+    return resultats
+def InsertionDefinition(titre,definition):
     request = 'INSERT INTO dictionnaire(titre, definition) VALUES (%s, %s);'
     with mysql.connector.connect(**connection_params) as db:
         with db.cursor() as c:
             c.execute(request, (titre, definition))
             db.commit()
-def ModificationDefinition():
-    print(1)
+def ModificationDefinition(definition, titre):
+    request = 'UPDATE dictionnaire SET definition=%s WHERE titre=%s'
+    with mysql.connector.connect(**connection_params) as db:
+        with db.cursor() as c:
+            c.execute(request, (definition, titre))
+            db.commit()
 def Modification(request):
     with mysql.connector.connect(**connection_params) as db:
         with db.cursor() as c:
