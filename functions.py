@@ -15,13 +15,17 @@ def db(type):
     db = mysql.connector.connect(**connection_params)
     if type:
         db.close()
-
 def PushRequest(request):
     with mysql.connector.connect(**connection_params) as db:
         with db.cursor() as c:
             c.execute(request)
             resultats = c.fetchall()
         return resultats
+
+def RecupUsers():
+    request="SELECT username, password FROM users"
+    resultats =PushRequest(request)
+    return resultats
 
 def AfficherDictionnaire(cnv):
     request = "SELECT titre, definition FROM dictionnaire"
@@ -46,7 +50,6 @@ def AfficherDictionnaire(cnv):
     dictionnaire_affiche = True
 
     return treeview
-
 def InsertionDefinition():
     titre = "Titre de la définition"
     definition = "Contenu de la définition"
@@ -55,16 +58,11 @@ def InsertionDefinition():
         with db.cursor() as c:
             c.execute(request, (titre, definition))
             db.commit()
-
-
 def ModificationDefinition():
     print(1)
-
-
 def Modification(request):
     with mysql.connector.connect(**connection_params) as db:
         with db.cursor() as c:
             c.execute(request)
-
 def quitter_application(root):
     root.quit()  # Quitter l'application
