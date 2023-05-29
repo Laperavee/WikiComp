@@ -7,7 +7,8 @@ import insertion
 import update
 
 btnAffichage = None
-def wrapper_function(func, *args, **kwargs): # Fonction affichant le bouton de suppression du tableau
+def wrapper_function(func, *args, **kwargs): # Fonction affichant le bouton de suppression du tableau (Wrapper_function permet d'éviter les conflits
+                                             # entre fonctions. Le passage par une fonction tampon comme celle-ci évite de supprimer un tableau non existant par ex.
     treeview = func(*args, **kwargs)
     btnAffichage.config(state=tk.DISABLED)
     btnSupprimerTableau = tk.Button(frame, text="Enlever le dictionnaire",
