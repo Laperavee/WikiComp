@@ -6,9 +6,9 @@ import hashlib
 
 import functions
 
-def DestroyApp(root):
+def DestroyApp(root): # Fonction fermant l'application
     root.quit()
-def se_connecter(entryUsername, entryPassword, callback):
+def se_connecter(entryUsername, entryPassword, callback): # Fonction vérifiant les identifiants de connexion
     # Récupérer les valeurs du nom d'utilisateur et du mot de passe
     username = entryUsername.get()
     password = entryPassword.get()
@@ -28,7 +28,7 @@ def se_connecter(entryUsername, entryPassword, callback):
     callback(user_connexion)
 
 
-def afficher_fenetre_connexion(callback):
+def afficher_fenetre_connexion(callback): # Fonction permettant d'afficher la fen^tre de connexion
     # Créer la fenêtre de connexion
     root = tk.Tk()
     root.geometry("200x150")

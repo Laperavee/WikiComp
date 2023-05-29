@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import font
 import functions
 
-def updatewindow():
+def updatewindow(): # Fonction permettant l'affichage de la fenêtre indexant les différentes définitions
     root = tk.Tk()
     root.geometry("400x200")
     root.title("Modification / Suppression")
@@ -27,13 +27,13 @@ def updatewindow():
 
     root.mainloop()
 
-def modifrequete(description,titre,window):
-    functions.ModificationDefinition(description.get(),titre)
+def modifrequete(description,titre,window): # Fonction permettant la modification d'une description, suivie de la fermeture de la fenêtre de modification
+    functions.ModificationDefinition(description.get("1.0", "end-1c"),titre)
     window.destroy()
-def deleterequete(titre,window):
+def deleterequete(titre,window): # Fonction permettant la suppression d'une description, suivie de la fermeture de la fenêtre de modification
     functions.DeleteDefinition(titre)
     window.destroy()
-def newwindowmodif(titre):
+def newwindowmodif(titre): # Fonction permettant d'ouvrir la fenêtre de modification pour une définition
     window = tk.Tk()
     window.geometry("400x600")
 

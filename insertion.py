@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import font
 import functions
-def InsertDefinition(titre,definition,root):
+def InsertDefinition(titre,definition,root): # Fonction permettant l'insertion d'une description, suivie de la fermeture de la fenêtre de modification
     functions.InsertionDefinition(titre,definition)
     root.destroy()
-def insertionwindow():
+def insertionwindow(): # Fonction permettant l'affichage de la fenêtre d'insertion
     root = tk.Tk()
     root.geometry("800x600")
     root.title("Nouvelle définition")
